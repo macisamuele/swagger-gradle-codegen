@@ -53,7 +53,7 @@ abstract class GenerateTask : DefaultTask() {
     abstract val extraFiles: DirectoryProperty
 
     @get:Nested
-    @get:Option(option = "featureHeaderToRemove", description = "")
+    @get:Option(option = "features", description = "Configure optional features of the generator")
     var features: FeatureConfiguration? = null
 
     @TaskAction
@@ -66,6 +66,7 @@ abstract class GenerateTask : DefaultTask() {
         val specVersion = specVersion.get()
 
         val headersToRemove = features?.headersToRemove?.get() ?: emptyList()
+        val supportMoshiReflective: Boolean = features?.supportMoshiReflective?.get() ?: false
 
         println("""
             ####################
@@ -79,7 +80,9 @@ abstract class GenerateTask : DefaultTask() {
             output ${"\t\t"} $outputDir
             groupId ${'\t'} $packageName
             artifactId ${'\t'} $packageName
-            features ${'\t'} ${headersToRemove.joinToString(separator = ",", prefix = "[", postfix = "]")}
+            features ${'\t'}
+            ${'\t'} headersToRemove = ${headersToRemove.joinToString(separator = ",", prefix = "[", postfix = "]")}
+            ${'\t'} supportMoshiReflective = $supportMoshiReflective
         """.trimIndent())
 
         val params = mutableListOf<String>()
@@ -101,6 +104,10 @@ abstract class GenerateTask : DefaultTask() {
         if (headersToRemove.isNotEmpty()) {
             params.add("-ignoreheaders")
             params.add(headersToRemove.joinToString(","))
+        }
+
+        if (supportMoshiReflective) {
+            params.add("-supportMoshiReflective")
         }
 
         // Running the Codegen Main here

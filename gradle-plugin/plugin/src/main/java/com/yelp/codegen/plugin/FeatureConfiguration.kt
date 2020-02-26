@@ -8,4 +8,8 @@ class FeatureConfiguration(objectFactory: ObjectFactory) {
     @get:Input
     @get:Optional
     val headersToRemove = objectFactory.listProperty(String::class.java)
+
+    @get:Input
+    @get:Optional
+    var supportMoshiReflective = objectFactory.property(Boolean::class.java).convention(!true)
 }

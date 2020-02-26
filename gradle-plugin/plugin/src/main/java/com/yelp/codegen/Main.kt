@@ -14,6 +14,7 @@ import org.apache.commons.cli.DefaultParser
 import org.apache.commons.cli.Option
 import org.apache.commons.cli.Options
 
+@Suppress("LongMethod")
 fun main(args: Array<String>) {
     val options = Options()
     options.addRequiredOption(
@@ -57,6 +58,12 @@ fun main(args: Array<String>) {
                     .desc("A comma separated list of headers that will be ignored by the generator")
                     .build()
     )
+    options.addOption(
+            Option.builder("supportMoshiReflective")
+                    .desc("Enable support of moshi-kotlin into the generated code.")
+                    .type(Boolean::class.java)
+                    .build()
+    )
 
     val parser: CommandLineParser = DefaultParser()
     val parsed: CommandLine = parser.parse(options, args)
@@ -75,6 +82,7 @@ fun main(args: Array<String>) {
     configurator.addAdditionalProperty(GROUP_ID, parsed['g'])
     configurator.addAdditionalProperty(ARTIFACT_ID, parsed['a'])
     configurator.addAdditionalProperty(HEADERS_TO_IGNORE, parsed["ignoreheaders"])
+    configurator.addAdditionalProperty(SUPPORT_MOSHI_REFLECTIVE, parsed.hasOption("supportMoshiReflective"))
 
     DefaultGenerator().opts(configurator.toClientOptInput()).generate()
     copySpec(checkNotNull(configurator.inputSpec), checkNotNull(configurator.outputDir))

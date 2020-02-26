@@ -29,6 +29,8 @@ const val SERVICE_NAME = "service_name"
 const val ARTIFACT_ID = "artifact_id"
 const val GROUP_ID = "group_id"
 const val HEADERS_TO_IGNORE = "headers_to_ignore"
+// This feature is a kotlin* only feature
+const val SUPPORT_MOSHI_REFLECTIVE = "support_moshi_reflective"
 
 // Vendor Extensions Names
 internal const val X_NULLABLE = "x-nullable"
