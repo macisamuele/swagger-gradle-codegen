@@ -114,7 +114,6 @@ open class KotlinGenerator : SharedCodegen() {
             "apiDocPath" to apiDocPath,
             "modelDocPath" to modelDocPath,
             "service" to serviceName,
-            "newline" to "\n"
         )
 
     override val supportFiles: Collection<SupportingFile>
