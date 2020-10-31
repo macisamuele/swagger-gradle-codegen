@@ -34,5 +34,10 @@ jobs:
       with:
         gradle-version: wrapper
         arguments: preMerge
+    - uses: actions/upload-artifact@v2
+      if: failure()
+      with:
+        name: my-artifact
+        path: '**/reports/**'
     - name: Publish Coverage
       uses: codecov/codecov-action@v1
