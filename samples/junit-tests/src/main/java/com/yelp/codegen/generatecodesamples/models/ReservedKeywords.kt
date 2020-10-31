@@ -24,5 +24,5 @@ data class ReservedKeywords(
     @Json(name = "operator") @field:Json(name = "operator") var `operator`: String? = null,
     @Json(name = "val") @field:Json(name = "val") var `val`: String? = null,
     @Json(name = "var") @field:Json(name = "var") var `var`: String? = null,
-    @Json(name = "when") @field:Json(name = "when") var `when`: String? = null
+    @Json(name = "when") @field:Json(name = "when") var `when`: String? = null,
 )
