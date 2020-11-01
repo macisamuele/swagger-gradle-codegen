@@ -25,11 +25,11 @@ interface {{classname}} {
     {{#isMultipart}}@retrofit2.http.Multipart{{/isMultipart}}{{^isMultipart}}@retrofit2.http.FormUrlEncoded{{/isMultipart}}
   {{/-first}}
   {{/formParams}}
-  {{#vendorExtensions.hasOperationHeaders}}
+  {{#vendorExtensions.x-has-operation-headers}}
     @Headers(
-        {{#vendorExtensions.operationHeaders}}"{{first}}: {{second}}",
-    ){{/vendorExtensions.operationHeaders}}
-    {{/vendorExtensions.hasOperationHeaders}}
+        {{#vendorExtensions.x-operation-headers}}"{{first}}: {{second}}",
+    ){{/vendorExtensions.x-operation-headers}}
+    {{/vendorExtensions.x-has-operation-headers}}
     @{{httpMethod}}("{{{path}}}"){{#vendorExtensions.x-unsafe-operation}}{{#isDeprecated}}
     @Deprecated(message = "Deprecated and unsafe to use"){{/isDeprecated}}{{^isDeprecated}}
     @Deprecated(message = "Unsafe to use"){{/isDeprecated}}{{/vendorExtensions.x-unsafe-operation}}{{^vendorExtensions.x-unsafe-operation}}{{#isDeprecated}}
