@@ -30,8 +30,8 @@ open class KotlinGenerator : SharedCodegen() {
         @JvmStatic val VERSION = 12
 
         // Vendor Extension use to generate the list of top level headers
-        const val HAS_OPERATION_HEADERS = "hasOperationHeaders"
-        const val OPERATION_HEADERS = "operationHeaders"
+        const val X_HAS_OPERATION_HEADERS = "x-has-operation-headers"
+        const val X_OPERATION_HEADERS = "x-operation-headers"
     }
 
     private val apiDocPath = "docs/"
@@ -437,7 +437,7 @@ open class KotlinGenerator : SharedCodegen() {
 
         // Let's process the top level Headers and eventually add the retrofit annotations.
         processTopLevelHeaders(codegenOperation)
-        if (codegenOperation.vendorExtensions[HAS_OPERATION_HEADERS] == true) {
+        if (codegenOperation.vendorExtensions[X_HAS_OPERATION_HEADERS] == true) {
             codegenOperation.imports.add("retrofit2.http.Headers")
         }
 
@@ -514,8 +514,8 @@ open class KotlinGenerator : SharedCodegen() {
         val headersToIgnore = getHeadersToIgnore()
         topLevelHeaders.removeIf { it.first in headersToIgnore }
 
-        operation.vendorExtensions[HAS_OPERATION_HEADERS] = topLevelHeaders.isNotEmpty()
-        operation.vendorExtensions[OPERATION_HEADERS] = topLevelHeaders
+        operation.vendorExtensions[X_HAS_OPERATION_HEADERS] = topLevelHeaders.isNotEmpty()
+        operation.vendorExtensions[X_OPERATION_HEADERS] = topLevelHeaders
     }
 
     /**
