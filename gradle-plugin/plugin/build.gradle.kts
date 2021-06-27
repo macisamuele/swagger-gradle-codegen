@@ -8,7 +8,7 @@ plugins {
     id("java-gradle-plugin")
     `maven-publish`
     jacoco
-    kotlin("jvm") version "1.3.72"
+    kotlin("jvm") version "1.5.10"
     id("com.gradle.plugin-publish") version "0.12.0"
     id("io.gitlab.arturbosch.detekt") version "1.14.2"
 }
@@ -19,11 +19,11 @@ java {
 }
 
 jacoco {
-    toolVersion = "0.8.5"
+    toolVersion = "0.8.7"
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10")
 
     implementation(gradleApi())
 
@@ -31,7 +31,7 @@ dependencies {
     implementation("com.google.guava:guava:27.0-jre")
     implementation("io.swagger:swagger-codegen:2.4.16")
 
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13.2")
 }
 
 tasks.register<Jar>("sourcesJar") {
